@@ -13,6 +13,13 @@ var cheerio = require('cheerio')
 
 var app = express()
 
+var projectsURL = 'https://github.com/karan/Projects/blob/master/README-scratch.md'
+  , projectsHTML
+
+request(projectsURL, function (err, res, body) {
+  projectsHTML = body
+})
+
 // all environments
 app.set('port', process.env.PORT || 3000)
 app.set('views', path.join(__dirname, 'views'))
