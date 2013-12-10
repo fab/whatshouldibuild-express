@@ -8,6 +8,9 @@ var routes = require('./routes')
 var user = require('./routes/user')
 var http = require('http')
 var path = require('path')
+var ejs  = require('ejs')
+var request = require('request')
+var cheerio = require('cheerio')
 
 var app = express()
 
