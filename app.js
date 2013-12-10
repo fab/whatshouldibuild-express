@@ -36,7 +36,19 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler())
 }
 
+app.set('getRandomProject', function (callback) {
+  $ = cheerio.load(projectsHTML)
+  var projects = $('.markdown-body p')
+    , randNum = Math.floor(Math.random() * projects.length)
+    , project = $(projects)[randNum]
+    , title = $(project).find('strong').text()
+    , description = $(project).text().slice(title.length + 3)
+
+  callback(title, description)
+})
+
 app.get('/', routes.index)
+app.get('/suggest', routes.suggest)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'))
